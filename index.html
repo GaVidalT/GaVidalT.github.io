@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gabriel Vidal Tévar — Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --surface2: #18181f;
+    --border: #2a2a35;
+    --accent: #c8f060;
+    --accent2: #60d0f0;
+    --text: #e8e8f0;
+    --text-muted: #7070a0;
+    --text-dim: #4a4a70;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ── LANG SWITCHER ── */
+  .lang-switcher {
+    position: fixed;
+    top: 20px; right: 24px;
+    z-index: 100;
+    display: flex;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+  }
+  .lang-btn {
+    padding: 8px 18px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 0.1em;
+    color: var(--text-dim);
+    background: transparent;
+    border: none; cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .lang-btn.active { background: var(--accent); color: var(--bg); font-weight: 500; }
+  .lang-btn:not(.active):hover { color: var(--text-muted); }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 80px 8vw;
+    gap: 60px;
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(200,240,96,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-left {
+    position: relative; z-index: 1;
+    opacity: 0; transform: translateY(30px);
+    animation: fadeUp 0.8s ease forwards;
+  }
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 0.2em;
+    color: var(--accent); text-transform: uppercase;
+    margin-bottom: 24px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .hero-tag::before { content: ''; display: inline-block; width: 24px; height: 1px; background: var(--accent); }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(48px, 6vw, 80px);
+    line-height: 1.0; letter-spacing: -0.02em; margin-bottom: 8px;
+  }
+  .name-accent { color: var(--accent); }
+  .hero-subtitle {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px; color: var(--text-muted);
+    letter-spacing: 0.05em; margin-top: 16px; margin-bottom: 32px;
+  }
+  .hero-bio { font-size: 15px; color: var(--text-muted); max-width: 440px; line-height: 1.8; margin-bottom: 40px; }
+  .hero-bio strong { color: var(--text); font-weight: 500; }
+  .contact-row { display: flex; flex-wrap: wrap; gap: 12px; }
+  .contact-pill {
+    display: flex; align-items: center; gap: 7px;
+    padding: 8px 16px; border: 1px solid var(--border);
+    border-radius: 100px; font-family: 'DM Mono', monospace;
+    font-size: 11px; color: var(--text-muted);
+    text-decoration: none; transition: all 0.2s ease; background: var(--surface);
+  }
+  .contact-pill:hover { border-color: var(--accent); color: var(--accent); background: rgba(200,240,96,0.05); }
+  .contact-pill svg { width: 12px; height: 12px; flex-shrink: 0; }
+
+  .hero-right {
+    position: relative; z-index: 1;
+    opacity: 0; animation: fadeUp 0.8s 0.2s ease forwards;
+  }
+  .stats-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1px; background: var(--border);
+    border: 1px solid var(--border); border-radius: 16px;
+    overflow: hidden; margin-bottom: 20px;
+  }
+  .stat-cell { background: var(--surface); padding: 28px 24px; transition: background 0.2s ease; }
+  .stat-cell:hover { background: var(--surface2); }
+  .stat-number { font-family: 'DM Serif Display', serif; font-size: 42px; line-height: 1; color: var(--accent); margin-bottom: 6px; }
+  .stat-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); }
+  .availability-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 18px; background: rgba(200,240,96,0.08);
+    border: 1px solid rgba(200,240,96,0.2); border-radius: 100px;
+    font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent);
+  }
+  .dot-pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
+
+  /* ── SECTIONS ── */
+  .cv-sections {
+    padding: 80px 8vw;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px 80px;
+  }
+  .section-full { grid-column: 1 / -1; }
+  .section-label {
+    font-family: 'DM Mono', monospace; font-size: 10px;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 28px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .exp-item {
+    padding: 24px; border: 1px solid var(--border); border-radius: 12px;
+    margin-bottom: 16px; background: var(--surface);
+    transition: border-color 0.2s ease; position: relative; overflow: hidden;
+  }
+  .exp-item::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px; background: var(--accent); opacity: 0; transition: opacity 0.2s ease;
+  }
+  .exp-item:hover::before { opacity: 1; }
+  .exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; flex-wrap: wrap; gap: 8px; }
+  .exp-title { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--text); }
+  .exp-date { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-dim); letter-spacing: 0.1em; background: var(--surface2); padding: 4px 10px; border-radius: 100px; border: 1px solid var(--border); white-space: nowrap; }
+  .exp-company { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--accent2); margin-bottom: 12px; letter-spacing: 0.05em; }
+  .exp-desc { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+  .exp-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .tag { font-family: 'DM Mono', monospace; font-size: 10px; padding: 4px 10px; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; color: var(--text-muted); letter-spacing: 0.05em; }
+  .tag.accent { border-color: rgba(200,240,96,0.3); color: var(--accent); background: rgba(200,240,96,0.05); }
+
+  .skills-grid { display: grid; gap: 10px; }
+  .skill-row { display: flex; align-items: center; gap: 14px; padding: 12px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; }
+  .skill-name { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--text); width: 110px; flex-shrink: 0; }
+  .skill-bar { flex: 1; height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .skill-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 2px; width: 0; transition: width 1s cubic-bezier(0.16, 1, 0.3, 1); }
+  .skill-level { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-dim); width: 30px; text-align: right; }
+
+  .edu-card { padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 16px; }
+  .edu-degree { font-family: 'DM Serif Display', serif; font-size: 20px; margin-bottom: 6px; }
+  .edu-school { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--accent2); margin-bottom: 4px; }
+  .edu-date { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-dim); }
+
+  .lang-item { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 10px; }
+  .lang-name { font-family: 'DM Mono', monospace; font-size: 13px; }
+  .lang-level { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); background: rgba(200,240,96,0.08); padding: 4px 12px; border-radius: 100px; border: 1px solid rgba(200,240,96,0.2); }
+
+  .project-card { padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 16px; transition: border-color 0.2s; }
+  .project-card:hover { border-color: rgba(96,208,240,0.3); }
+  .project-title { font-family: 'DM Serif Display', serif; font-size: 18px; margin-bottom: 4px; }
+  .project-link { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent2); text-decoration: none; display: inline-flex; align-items: center; gap: 5px; margin-bottom: 12px; transition: color 0.2s; }
+  .project-link:hover { color: var(--text); }
+  .project-desc { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+
+  .cv-divider { margin: 0 8vw; height: 1px; background: var(--border); }
+
+  /* ── CHAT ── */
+  .chat-section { padding: 80px 8vw; }
+  .chat-header { text-align: center; margin-bottom: 48px; opacity: 0; transform: translateY(20px); animation: fadeUp 0.6s 0.3s ease forwards; }
+  .chat-header h2 { font-family: 'DM Serif Display', serif; font-size: clamp(32px, 4vw, 52px); margin-bottom: 12px; }
+  .chat-header p { font-size: 15px; color: var(--text-muted); max-width: 500px; margin: 0 auto 24px; }
+  .accent-text { color: var(--accent); }
+  .suggested-questions { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 32px; }
+  .suggestion-btn { padding: 8px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 100px; font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-muted); cursor: pointer; transition: all 0.2s ease; }
+  .suggestion-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(200,240,96,0.05); }
+
+  .chat-container { max-width: 780px; margin: 0 auto; }
+  .chat-box { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+  .chat-topbar { padding: 14px 20px; background: var(--surface2); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 12px; }
+  .agent-avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; font-family: 'DM Serif Display', serif; font-size: 14px; color: var(--bg); font-weight: bold; }
+  .agent-info { flex: 1; }
+  .agent-name { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--text); }
+  .agent-status { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--accent); display: flex; align-items: center; gap: 5px; }
+  .agent-status::before { content: ''; display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
+
+  .messages { height: 420px; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 16px; scroll-behavior: smooth; }
+  .messages::-webkit-scrollbar { width: 4px; }
+  .messages::-webkit-scrollbar-track { background: transparent; }
+  .messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  .msg { display: flex; flex-direction: column; max-width: 75%; }
+  .msg.user { align-self: flex-end; align-items: flex-end; }
+  .msg.agent { align-self: flex-start; align-items: flex-start; }
+  .msg-bubble { padding: 12px 16px; border-radius: 12px; font-size: 14px; line-height: 1.6; }
+  .msg.user .msg-bubble { background: rgba(200,240,96,0.1); border: 1px solid rgba(200,240,96,0.2); color: var(--text); border-bottom-right-radius: 4px; }
+  .msg.agent .msg-bubble { background: var(--surface2); border: 1px solid var(--border); color: var(--text); border-bottom-left-radius: 4px; }
+  .msg-time { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-dim); margin-top: 4px; padding: 0 4px; }
+  .typing-indicator .msg-bubble { display: flex; gap: 5px; align-items: center; padding: 14px 18px; }
+  .typing-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--text-dim); animation: typing 1.2s infinite; }
+  .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+  .chat-input-area { padding: 16px 20px; border-top: 1px solid var(--border); display: flex; gap: 10px; background: var(--surface2); }
+  .chat-input { flex: 1; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px 16px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--text); outline: none; transition: border-color 0.2s ease; resize: none; height: 42px; }
+  .chat-input:focus { border-color: rgba(200,240,96,0.4); }
+  .chat-input::placeholder { color: var(--text-dim); }
+  .send-btn { width: 42px; height: 42px; background: var(--accent); border: none; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; flex-shrink: 0; }
+  .send-btn:hover { background: #d4f57a; transform: scale(1.05); }
+  .send-btn:disabled { background: var(--border); cursor: not-allowed; transform: none; }
+  .send-btn svg { width: 16px; height: 16px; color: var(--bg); }
+
+  footer { padding: 40px 8vw; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  .footer-name { font-family: 'DM Serif Display', serif; font-size: 20px; }
+  .footer-copy { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-dim); }
+
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+  @keyframes typing { 0%, 60%, 100% { transform: translateY(0); opacity: 0.4; } 30% { transform: translateY(-4px); opacity: 1; } }
+  @keyframes langFade { from { opacity: 0.4; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  .lang-anim { animation: langFade 0.3s ease forwards; }
+
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; padding: 80px 6vw 60px; min-height: auto; gap: 40px; }
+    .cv-sections { grid-template-columns: 1fr; padding: 60px 6vw; }
+    .section-full { grid-column: 1; }
+    .chat-section { padding: 60px 6vw; }
+    footer { padding: 30px 6vw; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── LANG SWITCHER ── -->
+<div class="lang-switcher">
+  <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" id="btn-es" onclick="setLang('es')">ES</button>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag" id="hero-tag"></div>
+    <h1>Gabriel<br><span class="name-accent">Vidal</span><br>Tévar</h1>
+    <p class="hero-subtitle" id="hero-sub"></p>
+    <p class="hero-bio" id="hero-bio"></p>
+    <div class="contact-row">
+      <a class="contact-pill" href="/cdn-cgi/l/email-protection#8ee9eff8e7eaefe2facee9e3efe7e2a0ede1e3">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+        <span class="__cf_email__" data-cfemail="88efe9fee1ece9e4fcc8efe5e9e1e4a6ebe7e5">[email&#160;protected]</span>
+      </a>
+      <a class="contact-pill" href="tel:635896752">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        635 896 752
+      </a>
+      <a class="contact-pill" href="https://www.linkedin.com/in/gabriel-vidal-t%C3%A9var-a8b5742a9/" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+      <a class="contact-pill" href="https://github.com/GaVidalT" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        GitHub
+      </a>
+      <a class="contact-pill" href="https://www.prise.es/es/" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+        prise.es
+      </a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="stats-grid">
+      <div class="stat-cell"><div class="stat-number">1+</div><div class="stat-label" id="stat1"></div></div>
+      <div class="stat-cell"><div class="stat-number">5+</div><div class="stat-label" id="stat2"></div></div>
+      <div class="stat-cell"><div class="stat-number">B2</div><div class="stat-label" id="stat3"></div></div>
+      <div class="stat-cell"><div class="stat-number">2025</div><div class="stat-label" id="stat4"></div></div>
+    </div>
+    <div class="availability-badge"><div class="dot-pulse"></div><span id="avail-text"></span></div>
+  </div>
+</section>
+
+<!-- ── CV SECTIONS ── -->
+<div class="cv-sections">
+
+  <!-- EXPERIENCE -->
+  <div class="section-full">
+    <div class="section-label" id="sec-exp"></div>
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <div class="exp-title" id="exp1-title"></div>
+        <div class="exp-date" id="exp1-date"></div>
+      </div>
+      <div class="exp-company">Prise · prise.es · Sevilla, ES</div>
+      <div class="exp-desc" id="exp1-desc"></div>
+      <div class="exp-tags">
+        <span class="tag accent">PHP</span><span class="tag accent">Smarty</span><span class="tag accent">JavaScript</span>
+        <span class="tag accent">OpenID Connect</span><span class="tag accent">OAuth 2.0</span>
+        <span class="tag" id="tag-agile"></span><span class="tag" id="tag-sprint"></span><span class="tag">Hotfix</span>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <div class="exp-title" id="exp2-title"></div>
+        <div class="exp-date">Jul 2023 – 2024</div>
+      </div>
+      <div class="exp-company" id="exp2-company"></div>
+      <div class="exp-desc" id="exp2-desc"></div>
+      <div class="exp-tags">
+        <span class="tag" id="tag-cs"></span><span class="tag" id="tag-tw"></span><span class="tag" id="tag-pm"></span>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <div class="exp-title" id="exp3-title"></div>
+        <div class="exp-date">Jun 2022 – Ene 2023</div>
+      </div>
+      <div class="exp-company">Primark · Sevilla, ES</div>
+      <div class="exp-desc" id="exp3-desc"></div>
+      <div class="exp-tags">
+        <span class="tag" id="tag-inv"></span><span class="tag" id="tag-coord"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <div>
+    <div class="section-label" id="sec-skills"></div>
+    <div class="skills-grid" id="skillsGrid">
+      <div class="skill-row"><span class="skill-name">PHP</span><div class="skill-bar"><div class="skill-fill" data-width="80"></div></div><span class="skill-level">80%</span></div>
+      <div class="skill-row"><span class="skill-name">JavaScript</span><div class="skill-bar"><div class="skill-fill" data-width="78"></div></div><span class="skill-level">78%</span></div>
+      <div class="skill-row"><span class="skill-name">Python</span><div class="skill-bar"><div class="skill-fill" data-width="70"></div></div><span class="skill-level">70%</span></div>
+      <div class="skill-row"><span class="skill-name">Java</span><div class="skill-bar"><div class="skill-fill" data-width="60"></div></div><span class="skill-level">60%</span></div>
+      <div class="skill-row"><span class="skill-name">SQL</span><div class="skill-bar"><div class="skill-fill" data-width="72"></div></div><span class="skill-level">72%</span></div>
+      <div class="skill-row"><span class="skill-name">HTML / CSS</span><div class="skill-bar"><div class="skill-fill" data-width="82"></div></div><span class="skill-level">82%</span></div>
+      <div class="skill-row"><span class="skill-name">React Native</span><div class="skill-bar"><div class="skill-fill" data-width="55"></div></div><span class="skill-level">55%</span></div>
+      <div class="skill-row"><span class="skill-name">OAuth2 / OIDC</span><div class="skill-bar"><div class="skill-fill" data-width="75"></div></div><span class="skill-level">75%</span></div>
+    </div>
+  </div>
+
+  <!-- EDUCATION & LANGUAGES -->
+  <div>
+    <div class="section-label" id="sec-edu"></div>
+    <div class="edu-card">
+      <div class="edu-degree" id="edu-degree"></div>
+      <div class="edu-school">Universidad de Sevilla</div>
+      <div class="edu-date">2020 – Julio 2025</div>
+    </div>
+
+    <div class="section-label" style="margin-top:32px" id="sec-lang"></div>
+    <div class="lang-item"><span class="lang-name" id="lang-es-name"></span><span class="lang-level" id="lang-es-level"></span></div>
+    <div class="lang-item"><span class="lang-name" id="lang-en-name"></span><span class="lang-level">B2 · APTIS</span></div>
+
+    <div class="section-label" style="margin-top:32px" id="sec-other"></div>
+    <div class="lang-item"><span class="lang-name" id="other-drive"></span><span class="lang-level">B + A2</span></div>
+    <div class="lang-item"><span class="lang-name" id="other-vehicle"></span><span class="lang-level">✓</span></div>
+  </div>
+
+  <!-- PROJECT -->
+  <div class="section-full">
+    <div class="section-label" id="sec-proj"></div>
+    <div class="project-card">
+      <div class="project-title" id="proj-title"></div>
+      <a class="project-link" href="https://github.com/GaVidalT?tab=repositories" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        github.com/GaVidalT
+      </a>
+      <div class="project-desc" id="proj-desc"></div>
+      <div class="exp-tags" style="margin-top:14px">
+        <span class="tag accent">Java</span><span class="tag">REST API</span>
+        <span class="tag" id="tag-arch"></span><span class="tag" id="tag-wip"></span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="cv-divider"></div>
+
+<!-- ── CHAT SECTION ── -->
+<section class="chat-section">
+  <div class="chat-header">
+    <h2><span id="chat-title-1"></span> <span class="accent-text" id="chat-title-2"></span></h2>
+    <p id="chat-subtitle"></p>
+    <div class="suggested-questions" id="suggestions"></div>
+  </div>
+  <div class="chat-container">
+    <div class="chat-box">
+      <div class="chat-topbar">
+        <div class="agent-avatar">A</div>
+        <div class="agent-info">
+          <div class="agent-name" id="agent-name"></div>
+          <div class="agent-status" id="agent-status"></div>
+        </div>
+      </div>
+      <div class="messages" id="messages">
+        <div class="msg agent">
+          <div class="msg-bubble" id="welcome-msg"></div>
+          <div class="msg-time">Now</div>
+        </div>
+      </div>
+      <div class="chat-input-area">
+        <textarea class="chat-input" id="chatInput" rows="1" onkeydown="handleKey(event)"></textarea>
+        <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-name">Gabriel Vidal Tévar</div>
+  <div class="footer-copy">// Software Engineer · Sevilla, ES · 2025</div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ══════════════════════════════════════════
+// ALL TRANSLATIONS
+// ══════════════════════════════════════════
+const T = {
+  en: {
+    'hero-tag': 'Software Engineer · Open to opportunities',
+    'hero-sub': '// backend-oriented · full-stack capable · Seville, ES',
+    'hero-bio': 'Software Engineering graduate with <strong>real-world development experience</strong> building enterprise integrations, working in agile teams and shipping production code. Focused on backend, with working knowledge across the full stack.',
+    'stat1': 'Year professional exp.',
+    'stat2': 'Languages & frameworks',
+    'stat3': 'English — APTIS cert.',
+    'stat4': 'Graduated · Univ. Sevilla',
+    'avail-text': 'Available for new opportunities',
+    'sec-exp': 'Experience',
+    'exp1-title': 'Software Developer',
+    'exp1-date': '2024 – Present',
+    'exp1-desc': 'Working as a developer in a professional team using agile methodologies (sprints) alongside hotfix workflows. Contributed to enterprise-level web development and led the integration of modern authentication protocols — implementing OpenID Connect and OAuth 2.0 — improving platform security and enabling SSO capabilities.',
+    'tag-agile': 'Agile / Scrum',
+    'tag-sprint': 'Sprint planning',
+    'exp2-title': 'Waiter',
+    'exp2-company': 'Restaurante La Grama · Seville, ES',
+    'exp2-desc': 'Delivered high-quality customer service in a fast-paced environment. Built strong teamwork, communication, and resilience skills that translate directly into professional software development work.',
+    'tag-cs': 'Customer service',
+    'tag-tw': 'Teamwork',
+    'tag-pm': 'Pressure management',
+    'exp3-title': 'Stock Associate',
+    'exp3-desc': 'Efficient inventory management ensuring constant product availability. Developed coordination and task execution skills in a structured operational environment.',
+    'tag-inv': 'Inventory management',
+    'tag-coord': 'Coordination',
+    'sec-skills': 'Technical Skills',
+    'sec-edu': 'Education',
+    'edu-degree': 'B.Eng. Software Engineering',
+    'sec-lang': 'Languages',
+    'lang-es-name': 'Spanish',
+    'lang-es-level': 'Native',
+    'lang-en-name': 'English',
+    'sec-other': 'Other',
+    'other-drive': 'Driving Licence',
+    'other-vehicle': 'Own vehicle',
+    'sec-proj': 'Personal Projects',
+    'proj-title': 'Booking Management Backend',
+    'proj-desc': 'A backend service for reservation management built in Java, currently in active development. Demonstrates initiative and personal investment in backend architecture — applying REST principles and clean code practices beyond the daily work stack.',
+    'tag-arch': 'Backend architecture',
+    'tag-wip': 'In development',
+    'chat-title-1': 'Ask my',
+    'chat-title-2': 'representative',
+    'chat-subtitle': "Have questions about Gabriel? Our AI agent knows everything about his background, skills and potential. Ask away.",
+    'agent-name': "Alex · Gabriel's Representative",
+    'agent-status': 'Online · Ready to answer',
+    'welcome-msg': "Hello! I'm Alex, Gabriel's professional representative. I know everything about his background, skills, and what makes him stand out as a software engineer. Whether you're a recruiter, a technical lead, or just curious — ask me anything. I'm here to make the case for why Gabriel is exactly who you're looking for. 🚀",
+    'placeholder': 'Ask anything about Gabriel...',
+    'suggestions': ["Why hire Gabriel?", "What's his strongest skill?", "Tell me about his experience at Prise", "Is he available now?", "What kind of role fits him best?", "What makes him different from other juniors?"]
+  },
+  es: {
+    'hero-tag': 'Ingeniero de Software · Abierto a oportunidades',
+    'hero-sub': '// orientado a backend · full-stack · Sevilla, ES',
+    'hero-bio': 'Graduado en Ingeniería del Software con <strong>experiencia real en desarrollo</strong> de integraciones empresariales, trabajo en equipos ágiles y código en producción. Enfocado en backend, con conocimiento práctico en toda la pila tecnológica.',
+    'stat1': 'Año de exp. profesional',
+    'stat2': 'Lenguajes y frameworks',
+    'stat3': 'Inglés — Cert. APTIS',
+    'stat4': 'Graduado · Univ. Sevilla',
+    'avail-text': 'Disponible para nuevas oportunidades',
+    'sec-exp': 'Experiencia',
+    'exp1-title': 'Desarrollador de Software',
+    'exp1-date': '2024 – Actualidad',
+    'exp1-desc': 'Desarrollador en un equipo profesional con metodología ágil (sprints) y flujos de hotfix. Contribución al desarrollo web empresarial y liderazgo en la integración de protocolos de autenticación modernos — OpenID Connect y OAuth 2.0 — mejorando la seguridad de la plataforma y habilitando SSO.',
+    'tag-agile': 'Ágil / Scrum',
+    'tag-sprint': 'Planificación de sprints',
+    'exp2-title': 'Camarero',
+    'exp2-company': 'Restaurante La Grama · Sevilla, ES',
+    'exp2-desc': 'Atención al cliente de alta calidad en un entorno dinámico. Desarrollo de habilidades de trabajo en equipo, comunicación y resiliencia directamente aplicables al desarrollo de software profesional.',
+    'tag-cs': 'Atención al cliente',
+    'tag-tw': 'Trabajo en equipo',
+    'tag-pm': 'Gestión bajo presión',
+    'exp3-title': 'Reponedor',
+    'exp3-desc': 'Gestión eficiente del inventario asegurando disponibilidad constante. Desarrollo de habilidades de coordinación y ejecución de tareas en un entorno operativo estructurado.',
+    'tag-inv': 'Gestión de inventario',
+    'tag-coord': 'Coordinación',
+    'sec-skills': 'Habilidades Técnicas',
+    'sec-edu': 'Educación',
+    'edu-degree': 'Grado en Ingeniería del Software',
+    'sec-lang': 'Idiomas',
+    'lang-es-name': 'Español',
+    'lang-es-level': 'Nativo',
+    'lang-en-name': 'Inglés',
+    'sec-other': 'Otros',
+    'other-drive': 'Carnet de conducir',
+    'other-vehicle': 'Vehículo propio',
+    'sec-proj': 'Proyectos Personales',
+    'proj-title': 'Backend de Gestión de Reservas',
+    'proj-desc': 'Servicio backend de gestión de reservas desarrollado en Java, actualmente en desarrollo activo. Demuestra iniciativa propia y compromiso con la arquitectura backend — aplicando principios REST y buenas prácticas más allá del stack de trabajo diario.',
+    'tag-arch': 'Arquitectura backend',
+    'tag-wip': 'En desarrollo',
+    'chat-title-1': 'Pregúntale a mi',
+    'chat-title-2': 'representante',
+    'chat-subtitle': '¿Tienes preguntas sobre Gabriel? Nuestro agente IA conoce todo sobre su trayectoria, habilidades y potencial. Pregunta lo que quieras.',
+    'agent-name': 'Alex · Representante de Gabriel',
+    'agent-status': 'Online · Listo para responder',
+    'welcome-msg': '¡Hola! Soy Alex, el representante profesional de Gabriel. Conozco todo sobre su trayectoria, habilidades y lo que le hace destacar como ingeniero de software. Seas recruiter, líder técnico o simplemente tengas curiosidad — pregúntame lo que quieras. Estoy aquí para demostrar por qué Gabriel es exactamente la persona que buscas. 🚀',
+    'placeholder': 'Pregunta lo que quieras sobre Gabriel...',
+    'suggestions': ['¿Por qué contratar a Gabriel?', '¿Cuál es su habilidad más fuerte?', 'Cuéntame sobre su experiencia en Prise', '¿Está disponible ahora?', '¿Qué tipo de rol le va mejor?', '¿Qué le diferencia de otros juniors?']
+  }
+};
+
+// ══════════════════════════════════════════
+// LANG ENGINE
+// ══════════════════════════════════════════
+let currentLang = 'en';
+
+function setLang(lang) {
+  currentLang = lang;
+  const t = T[lang];
+
+  // Buttons
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+
+  // Text elements
+  const ids = Object.keys(t).filter(k => k !== 'suggestions' && k !== 'placeholder' && k !== 'welcome-msg');
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = t[id];
+  });
+
+  // Placeholder
+  document.getElementById('chatInput').placeholder = t['placeholder'];
+
+  // Welcome msg (only update if it's still the initial message)
+  const welcomeEl = document.getElementById('welcome-msg');
+  if (welcomeEl) welcomeEl.innerHTML = t['welcome-msg'];
+
+  // Suggestions
+  const container = document.getElementById('suggestions');
+  container.innerHTML = '';
+  t['suggestions'].forEach(q => {
+    const btn = document.createElement('button');
+    btn.className = 'suggestion-btn';
+    btn.textContent = q;
+    btn.onclick = () => sendSuggestion(btn);
+    container.appendChild(btn);
+  });
+
+  // Animate
+  document.querySelectorAll('.hero-left, .cv-sections, .chat-header').forEach(el => {
+    el.classList.remove('lang-anim');
+    void el.offsetWidth;
+    el.classList.add('lang-anim');
+  });
+}
+
+// Init on load
+setLang('en');
+
+// ══════════════════════════════════════════
+// SKILL BARS
+// ══════════════════════════════════════════
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.skill-fill').forEach(bar => {
+        bar.style.width = bar.dataset.width + '%';
+      });
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+observer.observe(document.getElementById('skillsGrid'));
+
+// ══════════════════════════════════════════
+// CHAT
+// ══════════════════════════════════════════
+const SYSTEM_PROMPT = `You are Alex, Gabriel Vidal Tévar's professional representative and talent agent. Your job is to sell Gabriel to potential employers, recruiters, and technical leads. You speak confidently, professionally, and with genuine enthusiasm — but always stay credible and grounded in facts.
+
+Here is everything you know about Gabriel:
+
+PERSONAL
+- Full name: Gabriel Vidal Tévar
+- Location: Tomares, Seville, Spain (CP 41940)
+- Email: gavidalt@gmail.com
+- Phone: 635 896 752
+- LinkedIn: https://www.linkedin.com/in/gabriel-vidal-tévar-a8b5742a9/
+- GitHub: https://github.com/GaVidalT
+- Driving licence: B and A2, own vehicle
+
+EDUCATION
+- Bachelor's Degree in Software Engineering (Grado en Ingeniería del Software)
+- Universidad de Sevilla
+- 2020 – July 2025 (recently graduated)
+
+LANGUAGES
+- Spanish: Native
+- English: B2 level, APTIS certified (official exam)
+
+PROFESSIONAL EXPERIENCE
+
+1. Software Developer @ Prise (prise.es) — 2024 to present (~1 year+)
+   - Professional development role at a real software company
+   - Tech stack: PHP, Smarty (PHP templating engine), JavaScript
+   - Led the integration of OpenID Connect (OIDC) and OAuth 2.0 — a complex, security-critical task demonstrating initiative and technical depth
+   - Works in agile methodology: sprint planning and execution, alongside hotfix workflows
+   - Collaborative team environment, professional codebase
+
+2. Waiter @ Restaurante La Grama — July 2023 to 2024
+   - Excellent customer service, teamwork, resilience under pressure
+
+3. Stock Associate @ Primark — June 2022 to January 2023
+   - Inventory coordination and operational reliability
+
+TECHNICAL SKILLS
+- Languages: PHP (primary), JavaScript, Python, Java, SQL, HTML/CSS
+- Frameworks/Libs: Smarty, React Native
+- Protocols: OAuth 2.0, OpenID Connect (OIDC)
+- Methodologies: Agile/Scrum, Sprint, Hotfix workflows
+- Currently learning/building: Java backend development
+
+PERSONAL PROJECT
+- Booking Management Backend (Java) — currently in active development
+- Available on GitHub: https://github.com/GaVidalT
+- Demonstrates personal initiative in backend architecture beyond work tasks
+
+STRENGTHS TO HIGHLIGHT
+- Real production experience at a professional company while finishing his degree
+- Hands-on work with security protocols (OAuth2/OIDC) — rare for junior devs
+- Solid foundation across the stack (frontend, backend, mobile)
+- Fast learner, driven to grow, adaptable
+- Strong soft skills: teamwork, communication, resilience (backed by real work experience)
+- Proactive: building personal projects in Java shows self-motivation
+- Bilingual (ES/EN), B2 certified — can work in international teams
+
+AVAILABILITY
+- Open to new opportunities immediately
+- Backend-focused but open to full-stack roles
+- Based in Seville but open to remote or relocation discussions
+
+INSTRUCTIONS:
+- Respond in the same language the user writes in (Spanish or English)
+- Be professional, confident, and persuasive — you are his rep, sell him well
+- Use specific facts and examples — don't be generic
+- Keep responses concise (3–5 sentences) unless a detailed answer is clearly needed
+- Never make up information not listed above
+- If asked something you don't know, say honestly you'd need to ask Gabriel directly`;
+
+let conversationHistory = [];
+
+function getTime() {
+  return new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+}
+
+function appendMessage(role, text) {
+  const messages = document.getElementById('messages');
+  const div = document.createElement('div');
+  div.className = `msg ${role}`;
+  div.innerHTML = `<div class="msg-bubble">${text.replace(/\n/g, '<br>')}</div><div class="msg-time">${getTime()}</div>`;
+  messages.appendChild(div);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function appendTyping() {
+  const messages = document.getElementById('messages');
+  const div = document.createElement('div');
+  div.className = 'msg agent typing-indicator';
+  div.innerHTML = `<div class="msg-bubble"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>`;
+  messages.appendChild(div);
+  messages.scrollTop = messages.scrollHeight;
+  return div;
+}
+
+// ── REEMPLAZA ESTE VALOR CON TU API KEY DE GEMINI ──
+const GEMINI_API_KEY = 'AIzaSyARcxsVUOBFloe0c8VHQ_bT9JUAxxxcmDg';
+
+async function sendMessage() {
+  const input = document.getElementById('chatInput');
+  const btn = document.getElementById('sendBtn');
+  const text = input.value.trim();
+  if (!text) return;
+
+  input.value = '';
+  btn.disabled = true;
+  appendMessage('user', text);
+  conversationHistory.push({ role: 'user', parts: [{ text }] });
+
+  const typing = appendTyping();
+
+  try {
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
+          contents: conversationHistory
+        })
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      const errMsg = data?.error?.message || 'Unknown error';
+      typing.remove();
+      appendMessage('agent', 'Error: ' + errMsg);
+      btn.disabled = false;
+      input.focus();
+      return;
+    }
+
+    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || 'No response received.';
+    typing.remove();
+    conversationHistory.push({ role: 'model', parts: [{ text: reply }] });
+    appendMessage('agent', reply);
+  } catch (e) {
+    typing.remove();
+    appendMessage('agent', currentLang === 'es' ? 'Error de conexión. Inténtalo de nuevo.' : 'Connection error. Please try again.');
+  }
+
+  btn.disabled = false;
+  input.focus();
+}
+
+function sendSuggestion(btn) {
+  document.getElementById('chatInput').value = btn.textContent;
+  sendMessage();
+}
+
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+}
+</script>
+
+</body>
+</html>
