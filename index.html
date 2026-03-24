@@ -750,13 +750,22 @@ async function sendMessage() {
     });
 
     const data = await response.json();
-    const reply = data.content?.[0]?.text || 'Sorry, something went wrong.';
+
+    // Muestra el error real si Anthropic falla
+    if (data.error) {
+      typing.remove();
+      appendMessage('agent', 'Error: ' + JSON.stringify(data.error));
+      btn.disabled = false;
+      return;
+    }
+
+    const reply = data.content?.[0]?.text || 'No response received.';
     typing.remove();
     conversationHistory.push({ role: 'assistant', content: reply });
     appendMessage('agent', reply);
   } catch (e) {
     typing.remove();
-    appendMessage('agent', currentLang === 'es' ? 'Error de conexión. Inténtalo de nuevo.' : 'Connection error. Please try again.');
+    appendMessage('agent', 'Error técnico: ' + e.message);
   }
 
   btn.disabled = false;
