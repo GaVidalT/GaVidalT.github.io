@@ -747,8 +747,13 @@ async function sendMessage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
-          contents: conversationHistory
+          contents: [
+            {
+              role: "user",
+              parts: [{ text: SYSTEM_PROMPT }]
+            },
+            ...conversationHistory
+          ]
         })
       }
     );
