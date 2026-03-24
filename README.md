@@ -1,1 +1,0 @@
-# GaVidalT.github.io
