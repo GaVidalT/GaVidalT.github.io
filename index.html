@@ -41,7 +41,6 @@
     opacity: 0.4;
   }
 
-  /* ── LANG SWITCHER ── */
   .lang-switcher {
     position: fixed;
     top: 20px; right: 24px;
@@ -65,7 +64,6 @@
   .lang-btn.active { background: var(--accent); color: var(--bg); font-weight: 500; }
   .lang-btn:not(.active):hover { color: var(--text-muted); }
 
-  /* ── HERO ── */
   .hero {
     position: relative;
     min-height: 100vh;
@@ -146,7 +144,6 @@
   }
   .dot-pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
 
-  /* ── SECTIONS ── */
   .cv-sections {
     padding: 80px 8vw;
     display: grid; grid-template-columns: 1fr 1fr; gap: 60px 80px;
@@ -204,7 +201,6 @@
 
   .cv-divider { margin: 0 8vw; height: 1px; background: var(--border); }
 
-  /* ── CHAT ── */
   .chat-section { padding: 80px 8vw; }
   .chat-header { text-align: center; margin-bottom: 48px; opacity: 0; transform: translateY(20px); animation: fadeUp 0.6s 0.3s ease forwards; }
   .chat-header h2 { font-family: 'DM Serif Display', serif; font-size: clamp(32px, 4vw, 52px); margin-bottom: 12px; }
@@ -270,26 +266,17 @@
 </head>
 <body>
 
-<!-- ── LANG SWITCHER ── -->
 <div class="lang-switcher">
   <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
   <button class="lang-btn" id="btn-es" onclick="setLang('es')">ES</button>
 </div>
 
-<!-- ── HERO ── -->
 <section class="hero">
   <div style="margin-top: 32px;">
-    <img 
-      src="foto.jpg" 
+    <img
+      src="foto.jpg"
       alt="Gabriel Vidal Tévar"
-      style="
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 2px solid var(--border);
-        display: block;
-      "
+      style="width:100px;height:100px;border-radius:50%;object-fit:cover;border:2px solid var(--border);display:block;"
     />
   </div>
   <div class="hero-left">
@@ -331,13 +318,10 @@
   </div>
 </section>
 
-<!-- ── CV SECTIONS ── -->
 <div class="cv-sections">
 
-  <!-- EXPERIENCE -->
   <div class="section-full">
     <div class="section-label" id="sec-exp"></div>
-
     <div class="exp-item">
       <div class="exp-header">
         <div class="exp-title" id="exp1-title"></div>
@@ -351,7 +335,6 @@
         <span class="tag" id="tag-agile"></span><span class="tag" id="tag-sprint"></span><span class="tag">Hotfix</span>
       </div>
     </div>
-
     <div class="exp-item">
       <div class="exp-header">
         <div class="exp-title" id="exp2-title"></div>
@@ -363,7 +346,6 @@
         <span class="tag" id="tag-cs"></span><span class="tag" id="tag-tw"></span><span class="tag" id="tag-pm"></span>
       </div>
     </div>
-
     <div class="exp-item">
       <div class="exp-header">
         <div class="exp-title" id="exp3-title"></div>
@@ -377,7 +359,6 @@
     </div>
   </div>
 
-  <!-- SKILLS -->
   <div>
     <div class="section-label" id="sec-skills"></div>
     <div class="skills-grid" id="skillsGrid">
@@ -390,7 +371,6 @@
     </div>
   </div>
 
-  <!-- EDUCATION & LANGUAGES -->
   <div>
     <div class="section-label" id="sec-edu"></div>
     <div class="edu-card">
@@ -398,17 +378,14 @@
       <div class="edu-school">Universidad de Sevilla</div>
       <div class="edu-date">2020 – Julio 2025</div>
     </div>
-
     <div class="section-label" style="margin-top:32px" id="sec-lang"></div>
     <div class="lang-item"><span class="lang-name" id="lang-es-name"></span><span class="lang-level" id="lang-es-level"></span></div>
     <div class="lang-item"><span class="lang-name" id="lang-en-name"></span><span class="lang-level">B2 · APTIS</span></div>
-
     <div class="section-label" style="margin-top:32px" id="sec-other"></div>
     <div class="lang-item"><span class="lang-name" id="other-drive"></span><span class="lang-level">B + A2</span></div>
     <div class="lang-item"><span class="lang-name" id="other-vehicle"></span><span class="lang-level">✓</span></div>
   </div>
 
-  <!-- PROJECT -->
   <div class="section-full">
     <div class="section-label" id="sec-proj"></div>
     <div class="project-card">
@@ -429,7 +406,6 @@
 
 <div class="cv-divider"></div>
 
-<!-- ── CHAT SECTION ── -->
 <section class="chat-section">
   <div class="chat-header">
     <h2><span id="chat-title-1"></span> <span class="accent-text" id="chat-title-2"></span></h2>
@@ -468,56 +444,34 @@
   <div class="footer-copy">// Software Engineer · Sevilla, ES · 2025</div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-// ══════════════════════════════════════════
-// ALL TRANSLATIONS
-// ══════════════════════════════════════════
+<script>
 const T = {
   en: {
     'hero-tag': 'Software Engineer · Open to opportunities',
     'hero-sub': '// backend-oriented · full-stack capable · Seville, ES · Remote-friendly · Open to relocation',
     'hero-bio': 'Software Engineering graduate with <strong>hands-on production experience</strong> in authentication systems and backend development in a production environment, working within agile teams since 2024.',
-    'stat1': 'Year professional exp.',
-    'stat2': 'Languages & frameworks',
-    'stat3': 'English — APTIS cert.',
-    'stat4': 'Graduated · Univ. Sevilla',
+    'stat1': 'Year professional exp.', 'stat2': 'Languages & frameworks', 'stat3': 'English — APTIS cert.', 'stat4': 'Graduated · Univ. Sevilla',
     'avail-text': 'Available · Remote or relocation',
     'sec-exp': 'Experience',
-    'exp1-title': 'Software Developer',
-    'exp1-date': '2024 – Present',
-    'exp1-desc': 'Adapting and extending a legacy PHP codebase (~15 years old) within a professional agile team — sprint planning, PR reviews, and hotfix workflows managed via Git and Jira. I worked on integration of OpenID Connect and OAuth 2.0 integration following RFC specifications, covering multiple flows (Authorization Code, Client Credentials, Resource Owner Password, Implicit, Hybrid), along with token validation, redirect handling, parameter parsing, and end-to-end debugging of authentication flows, contributing to enabling SSO functionality for production users.',
-    'tag-agile': 'Agile / Scrum',
-    'tag-sprint': 'Git · Jira · Confluence',
-    'exp2-title': 'Waiter',
-    'exp2-company': 'Restaurante La Grama · Seville, ES',
+    'exp1-title': 'Software Developer', 'exp1-date': '2024 – Present',
+    'exp1-desc': 'Adapting and extending a legacy PHP codebase (~15 years old) within a professional agile team — sprint planning, PR reviews, and hotfix workflows managed via Git and Jira. Worked on the integration of OpenID Connect and OAuth 2.0 following RFC specifications, covering multiple flows (Authorization Code, Client Credentials, Resource Owner Password, Implicit, Hybrid), along with token validation, redirect handling, parameter parsing, and end-to-end debugging of authentication flows, contributing to enabling SSO functionality for production users.',
+    'tag-agile': 'Agile / Scrum', 'tag-sprint': 'Git · Jira · Confluence',
+    'exp2-title': 'Waiter', 'exp2-company': 'Restaurante La Grama · Seville, ES',
     'exp2-desc': 'Customer-facing role in a busy environment. Developed teamwork and communication skills working under pressure.',
-    'tag-cs': 'Customer service',
-    'tag-tw': 'Teamwork',
-    'tag-pm': 'Pressure management',
+    'tag-cs': 'Customer service', 'tag-tw': 'Teamwork', 'tag-pm': 'Pressure management',
     'exp3-title': 'Stock Associate',
     'exp3-desc': 'Inventory coordination and task execution in a structured operational environment.',
-    'tag-inv': 'Inventory management',
-    'tag-coord': 'Coordination',
-    'sec-skills': 'Technical Skills',
-    'sec-edu': 'Education',
+    'tag-inv': 'Inventory management', 'tag-coord': 'Coordination',
+    'sec-skills': 'Technical Skills', 'sec-edu': 'Education',
     'edu-degree': 'B.Eng. Software Engineering',
-    'sec-lang': 'Languages',
-    'lang-es-name': 'Spanish',
-    'lang-es-level': 'Native',
-    'lang-en-name': 'English',
-    'sec-other': 'Other',
-    'other-drive': 'Driving Licence',
-    'other-vehicle': 'Own vehicle',
-    'sec-proj': 'Personal Projects',
-    'proj-title': 'Booking Management Backend',
+    'sec-lang': 'Languages', 'lang-es-name': 'Spanish', 'lang-es-level': 'Native', 'lang-en-name': 'English',
+    'sec-other': 'Other', 'other-drive': 'Driving Licence', 'other-vehicle': 'Own vehicle',
+    'sec-proj': 'Personal Projects', 'proj-title': 'Booking Management Backend',
     'proj-desc': 'REST API built with Java and Spring Boot, following a layered architecture (controller / service / repository). Uses DTOs for request/response mapping, PostgreSQL as the database with Flyway for migrations, and JWT-based authentication currently in progress. Built independently to practice backend architecture beyond the work stack.',
-    'tag-arch': 'Spring Boot · PostgreSQL',
-    'tag-wip': 'In development',
-    'chat-title-1': 'Ask my',
-    'chat-title-2': 'representative',
+    'tag-arch': 'Spring Boot · PostgreSQL', 'tag-wip': 'In development',
+    'chat-title-1': 'Ask my', 'chat-title-2': 'representative',
     'chat-subtitle': "Have questions about Gabriel? Our AI agent knows everything about his background, skills and potential. Ask away.",
-    'agent-name': "Alex · Gabriel's Representative",
-    'agent-status': 'Online · Ready to answer',
+    'agent-name': "Alex · Gabriel's Representative", 'agent-status': 'Online · Ready to answer',
     'welcome-msg': "Hello! I'm Alex, Gabriel's professional representative. Ask me anything about his background, skills, or experience — I'm here to help. 🚀",
     'placeholder': 'Ask anything about Gabriel...',
     'suggestions': ["Why hire Gabriel?", "Tell me about his OAuth2/OIDC work", "What's his tech stack?", "Is he available now?", "What kind of role fits him best?", "What makes him different from other juniors?"]
@@ -526,81 +480,48 @@ const T = {
     'hero-tag': 'Ingeniero de Software · Abierto a oportunidades',
     'hero-sub': '// orientado a backend · full-stack · Sevilla, ES · Teletrabajo · Abierto a reubicación',
     'hero-bio': 'Graduado en Ingeniería del Software con <strong>experiencia real en producción</strong> en sistemas de autenticación y desarrollo backend en entorno productivo, trabajando en equipos ágiles desde 2024.',
-    'stat1': 'Año de exp. profesional',
-    'stat2': 'Lenguajes y frameworks',
-    'stat3': 'Inglés — Cert. APTIS',
-    'stat4': 'Graduado · Univ. Sevilla',
+    'stat1': 'Año de exp. profesional', 'stat2': 'Lenguajes y frameworks', 'stat3': 'Inglés — Cert. APTIS', 'stat4': 'Graduado · Univ. Sevilla',
     'avail-text': 'Disponible · Remoto o reubicación',
     'sec-exp': 'Experiencia',
-    'exp1-title': 'Desarrollador de Software',
-    'exp1-date': '2024 – Actualidad',
+    'exp1-title': 'Desarrollador de Software', 'exp1-date': '2024 – Actualidad',
     'exp1-desc': 'Adaptación y extensión de una base de código PHP legacy (~15 años) en un equipo profesional con metodología ágil — planificación de sprints, revisión de PRs y flujos de hotfix gestionados con Git y Jira. Trabajé en la integración de OpenID Connect y OAuth 2.0 siguiendo especificaciones RFC, cubriendo múltiples flujos (Authorization Code, Client Credentials, Resource Owner Password, Implicit, Hybrid), junto con validación de tokens, gestión de redirecciones, parsing de parámetros y depuración end-to-end de flujos de autenticación, contribuyendo a habilitar la funcionalidad SSO para usuarios en producción.',
-    'tag-agile': 'Ágil / Scrum',
-    'tag-sprint': 'Git · Jira · Confluence',
-    'exp2-title': 'Camarero',
-    'exp2-company': 'Restaurante La Grama · Sevilla, ES',
+    'tag-agile': 'Ágil / Scrum', 'tag-sprint': 'Git · Jira · Confluence',
+    'exp2-title': 'Camarero', 'exp2-company': 'Restaurante La Grama · Sevilla, ES',
     'exp2-desc': 'Rol de atención al cliente en un entorno dinámico. Desarrollo de habilidades de trabajo en equipo y comunicación bajo presión.',
-    'tag-cs': 'Atención al cliente',
-    'tag-tw': 'Trabajo en equipo',
-    'tag-pm': 'Gestión bajo presión',
+    'tag-cs': 'Atención al cliente', 'tag-tw': 'Trabajo en equipo', 'tag-pm': 'Gestión bajo presión',
     'exp3-title': 'Reponedor',
     'exp3-desc': 'Coordinación de inventario y ejecución de tareas en un entorno operativo estructurado.',
-    'tag-inv': 'Gestión de inventario',
-    'tag-coord': 'Coordinación',
-    'sec-skills': 'Habilidades Técnicas',
-    'sec-edu': 'Educación',
+    'tag-inv': 'Gestión de inventario', 'tag-coord': 'Coordinación',
+    'sec-skills': 'Habilidades Técnicas', 'sec-edu': 'Educación',
     'edu-degree': 'Grado en Ingeniería del Software',
-    'sec-lang': 'Idiomas',
-    'lang-es-name': 'Español',
-    'lang-es-level': 'Nativo',
-    'lang-en-name': 'Inglés',
-    'sec-other': 'Otros',
-    'other-drive': 'Carnet de conducir',
-    'other-vehicle': 'Vehículo propio',
-    'sec-proj': 'Proyectos Personales',
-    'proj-title': 'Backend de Gestión de Reservas',
+    'sec-lang': 'Idiomas', 'lang-es-name': 'Español', 'lang-es-level': 'Nativo', 'lang-en-name': 'Inglés',
+    'sec-other': 'Otros', 'other-drive': 'Carnet de conducir', 'other-vehicle': 'Vehículo propio',
+    'sec-proj': 'Proyectos Personales', 'proj-title': 'Backend de Gestión de Reservas',
     'proj-desc': 'API REST desarrollada con Java y Spring Boot, siguiendo arquitectura en capas (controller / service / repository). Usa DTOs para el mapeo de peticiones y respuestas, PostgreSQL como base de datos con Flyway para migraciones, y autenticación con JWT actualmente en desarrollo. Construido de forma independiente para practicar arquitectura backend más allá del stack de trabajo diario.',
-    'tag-arch': 'Spring Boot · PostgreSQL',
-    'tag-wip': 'En desarrollo',
-    'chat-title-1': 'Pregúntale a mi',
-    'chat-title-2': 'representante',
+    'tag-arch': 'Spring Boot · PostgreSQL', 'tag-wip': 'En desarrollo',
+    'chat-title-1': 'Pregúntale a mi', 'chat-title-2': 'representante',
     'chat-subtitle': '¿Tienes preguntas sobre Gabriel? Nuestro agente IA conoce todo sobre su trayectoria, habilidades y potencial. Pregunta lo que quieras.',
-    'agent-name': 'Alex · Representante de Gabriel',
-    'agent-status': 'Online · Listo para responder',
+    'agent-name': 'Alex · Representante de Gabriel', 'agent-status': 'Online · Listo para responder',
     'welcome-msg': '¡Hola! Soy Alex, el representante profesional de Gabriel. Pregúntame lo que quieras sobre su trayectoria, habilidades o experiencia. 🚀',
     'placeholder': 'Pregunta lo que quieras sobre Gabriel...',
     'suggestions': ['¿Por qué contratar a Gabriel?', 'Cuéntame sobre su trabajo con OAuth2/OIDC', '¿Cuál es su stack técnico?', '¿Está disponible ahora?', '¿Qué tipo de rol le va mejor?', '¿Qué le diferencia de otros juniors?']
   }
 };
 
-// ══════════════════════════════════════════
-// LANG ENGINE
-// ══════════════════════════════════════════
 let currentLang = 'en';
 
 function setLang(lang) {
   currentLang = lang;
   const t = T[lang];
-
-  // Buttons
   document.getElementById('btn-en').classList.toggle('active', lang === 'en');
   document.getElementById('btn-es').classList.toggle('active', lang === 'es');
-
-  // Text elements
-  const ids = Object.keys(t).filter(k => k !== 'suggestions' && k !== 'placeholder' && k !== 'welcome-msg');
-  ids.forEach(id => {
+  Object.keys(t).filter(k => !['suggestions','placeholder','welcome-msg'].includes(k)).forEach(id => {
     const el = document.getElementById(id);
     if (el) el.innerHTML = t[id];
   });
-
-  // Placeholder
   document.getElementById('chatInput').placeholder = t['placeholder'];
-
-  // Welcome msg (only update if it's still the initial message)
   const welcomeEl = document.getElementById('welcome-msg');
   if (welcomeEl) welcomeEl.innerHTML = t['welcome-msg'];
-
-  // Suggestions
   const container = document.getElementById('suggestions');
   container.innerHTML = '';
   t['suggestions'].forEach(q => {
@@ -610,8 +531,6 @@ function setLang(lang) {
     btn.onclick = () => sendSuggestion(btn);
     container.appendChild(btn);
   });
-
-  // Animate
   document.querySelectorAll('.hero-left, .cv-sections, .chat-header').forEach(el => {
     el.classList.remove('lang-anim');
     void el.offsetWidth;
@@ -619,27 +538,18 @@ function setLang(lang) {
   });
 }
 
-// Init on load
 setLang('en');
 
-// ══════════════════════════════════════════
-// SKILL BARS
-// ══════════════════════════════════════════
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      entry.target.querySelectorAll('.skill-fill').forEach(bar => {
-        bar.style.width = bar.dataset.width + '%';
-      });
+      entry.target.querySelectorAll('.skill-fill').forEach(bar => { bar.style.width = bar.dataset.width + '%'; });
       observer.unobserve(entry.target);
     }
   });
 }, { threshold: 0.3 });
 observer.observe(document.getElementById('skillsGrid'));
 
-// ══════════════════════════════════════════
-// CHAT
-// ══════════════════════════════════════════
 const SYSTEM_PROMPT = `You are Alex, Gabriel Vidal Tévar's professional representative. Your ONLY job is to answer questions about Gabriel from recruiters or employers.
 
 CRITICAL RULES:
@@ -668,7 +578,7 @@ EXPERIENCE:
 1. Software Developer @ Prise (prise.es) — 2024 to present (~1 year)
    - Adapting and extending a legacy PHP codebase (~15 years old) in a professional team
    - Stack: PHP, Smarty, JavaScript
-   - Implemented an OpenID Connect (OIDC) and OAuth 2.0 integration following RFC specs,
+   - Worked on the integration of OpenID Connect (OIDC) and OAuth 2.0 following RFC specs,
      covering multiple flows: Authorization Code, Client Credentials, Resource Owner Password, Implicit, Hybrid
    - Also handled: token validation, redirect handling, parameter parsing, end-to-end debugging of authentication flows
    - Contributing to enabling SSO functionality for production users
@@ -698,11 +608,12 @@ PERSONAL PROJECT — Booking Management Backend (Java):
 
 KEY FACTS:
 - Real production experience on a legacy codebase while finishing his degree
-- Hands-on implementation of OAuth2/OIDC following RFC specs across multiple flows — uncommon at junior level
+- Hands-on work with OAuth2/OIDC following RFC specs across multiple flows — uncommon at junior level
 - End-to-end debugging of authentication flows in production
 - Works with Git, Jira and Confluence in a real team environment
 - Building personal projects in Java/Spring Boot beyond his work stack
-- Bilingual ES/EN (B2 certified), available immediately, backend-focused but open to full-stack`;
+- Bilingual ES/EN (B2 certified), available immediately, backend-focused but open to full-stack
+- Open to remote work and relocation`;
 
 let conversationHistory = [];
 
@@ -729,7 +640,6 @@ function appendTyping() {
   return div;
 }
 
-
 async function sendMessage() {
   const input = document.getElementById('chatInput');
   const btn = document.getElementById('sendBtn');
@@ -739,37 +649,33 @@ async function sendMessage() {
   input.value = '';
   btn.disabled = true;
   appendMessage('user', text);
-  conversationHistory.push({ role: 'user', parts: [{ text }] });
+  conversationHistory.push({ role: 'user', content: text });
 
   const typing = appendTyping();
 
   try {
-    const response = await fetch(
-      '/api/chat',
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
-          contents: conversationHistory,
-          generationConfig: { maxOutputTokens: 300, temperature: 0.7 }
-        })
-      }
-    );
+    const response = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        system: SYSTEM_PROMPT,
+        messages: conversationHistory
+      })
+    });
+
     const data = await response.json();
 
     if (!response.ok) {
-      const errMsg = data?.error?.message || 'Unknown error';
       typing.remove();
-      appendMessage('agent', 'Error: ' + errMsg);
+      appendMessage('agent', 'Error: ' + (data?.error?.message || JSON.stringify(data.error)));
       btn.disabled = false;
       input.focus();
       return;
     }
 
-    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || 'No response received.';
+    const reply = data.choices?.[0]?.message?.content || 'No response received.';
     typing.remove();
-    conversationHistory.push({ role: 'model', parts: [{ text: reply }] });
+    conversationHistory.push({ role: 'assistant', content: reply });
     appendMessage('agent', reply);
   } catch (e) {
     typing.remove();
